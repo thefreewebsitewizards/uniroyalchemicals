@@ -157,7 +157,7 @@ export default function HomePage() {
       </section>
 
       {/* Key Features */}
-      <section className="py-12 md:py-20 bg-green-50">
+      <section className="py-12 md:py-20 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
         <div className="container mx-auto px-4">
           <FadeInSection className="text-center mb-12 md:mb-16">
             <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-green-700 mb-4">
@@ -175,39 +175,45 @@ export default function HomePage() {
                 title: "Manufacturing Excellence",
                 description:
                   "State-of-the-art facilities with advanced technology ensuring consistent quality and reliability.",
+                color: "bg-blue-100", iconColor: "text-blue-600", borderColor: "border-blue-200"
               },
               {
                 icon: Shield,
-                title: "Quality Assurance",
+                title: "Quality Assurance", 
                 description:
                   "Rigorous quality control processes meeting international standards and customer specifications.",
+                color: "bg-orange-100", iconColor: "text-orange-600", borderColor: "border-orange-200"
               },
               {
                 icon: Lightbulb,
                 title: "Innovation Focus",
                 description: "Continuous R&D efforts developing cutting-edge solutions for evolving industry demands.",
+                color: "bg-yellow-100", iconColor: "text-yellow-600", borderColor: "border-yellow-200"
               },
               {
                 icon: Users,
                 title: "Customer-Centric",
                 description: "Dedicated support team providing tailored solutions and technical expertise.",
+                color: "bg-purple-100", iconColor: "text-purple-600", borderColor: "border-purple-200"
               },
               {
                 icon: Target,
                 title: "Reliability",
                 description: "Proven track record of consistent performance and dependable supply chain.",
+                color: "bg-red-100", iconColor: "text-red-600", borderColor: "border-red-200"
               },
               {
                 icon: Award,
                 title: "Sustainability",
                 description: "Environmental responsibility with eco-friendly processes and sustainable practices.",
+                color: "bg-green-100", iconColor: "text-green-600", borderColor: "border-green-200"
               },
             ].map((feature, index) => (
               <FadeInSection key={index} delay={index * 100}>
-                <Card className="border-green-200 hover:border-green-400 hover:shadow-lg hover:shadow-green-200/50 transition-all duration-300 transform hover:scale-105 h-full bg-white consistent-card dynamic-hover">
+                <Card className={`${feature.borderColor} hover:border-${feature.iconColor.split('-')[1]}-400 hover:shadow-lg hover:shadow-${feature.iconColor.split('-')[1]}-200/50 transition-all duration-300 transform hover:scale-105 h-full bg-white consistent-card dynamic-hover`}>
                   <CardHeader className="consistent-card-header pb-4">
-                    <div className="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-lg flex items-center justify-center mb-4 mx-auto">
-                      <feature.icon className="h-6 w-6 md:h-8 md:w-8 text-green-600" />
+                    <div className={`w-12 h-12 md:w-16 md:h-16 ${feature.color} rounded-lg flex items-center justify-center mb-4 mx-auto`}>
+                      <feature.icon className={`h-6 w-6 md:h-8 md:w-8 ${feature.iconColor}`} />
                     </div>
                     <CardTitle className="text-lg md:text-xl text-green-700">{feature.title}</CardTitle>
                     <CardDescription className="text-gray-600 leading-relaxed text-sm md:text-base">
@@ -236,29 +242,30 @@ export default function HomePage() {
             {[
               {
                 title: "Lead Stabilisers",
-                description:
-                  "Traditional stabilizers for cost-effective PVC processing applications with superior performance.",
+                description: "Traditional stabilizers for cost-effective PVC processing applications with superior performance.",
                 badge: "Popular",
+                badgeColor: "bg-blue-600",
                 href: "/products/lead-stabilisers",
               },
               {
                 title: "Calcium Zinc Stabilisers",
-                description:
-                  "Eco-friendly stabilizers for food-grade and medical applications ensuring safety and compliance.",
+                description: "Eco-friendly stabilizers for food-grade and medical applications ensuring safety and compliance.",
                 badge: "Eco-Friendly",
+                badgeColor: "bg-emerald-600",
                 href: "/products/calcium-zinc-stabilisers",
               },
               {
                 title: "Metallic Stearates",
-                description:
-                  "High-performance metallic stearates including Lead, Calcium, and Zinc Stearates for various applications.",
+                description: "High-performance metallic stearates including Lead, Calcium, and Zinc Stearates for various applications.",
                 badge: "New Range",
+                badgeColor: "bg-purple-600",
                 href: "/products/metallic-stearates",
               },
               {
                 title: "Lubricants",
                 description: "Processing aids for improved flow and surface finish in PVC manufacturing processes.",
-                badge: null,
+                badge: "Premium",
+                badgeColor: "bg-orange-600",
                 href: "/products/lubricants",
               },
             ].map((product, index) => (
@@ -274,7 +281,7 @@ export default function HomePage() {
                     />
                     {product.badge && (
                       <div className="absolute top-4 left-4">
-                        <Badge className="bg-green-600 text-white text-xs">{product.badge}</Badge>
+                        <Badge className={`${product.badgeColor} text-white text-xs`}>{product.badge}</Badge>
                       </div>
                     )}
                     <div className="absolute inset-0 bg-green-600/0 group-hover:bg-green-600/10 transition-colors duration-300"></div>
@@ -317,8 +324,7 @@ export default function HomePage() {
       </section>
 
       {/* Industries Served */}
-      <section className="py-12 md:py-20 bg-white">
-        <div className="container mx-auto px-4">
+<section className="py-12 md:py-20 bg-gradient-to-r from-white via-green-50 to-blue-50">        <div className="container mx-auto px-4">
           <FadeInSection className="text-center mb-12 md:mb-16">
             <h2 className="text-2xl md:text-3xl lg:text-5xl font-bold text-green-700 mb-4">Industries We Serve</h2>
             <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
@@ -328,15 +334,15 @@ export default function HomePage() {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
             {[
-              { name: "Pipes & Fittings", image: "/placeholder.svg?height=120&width=120&text=Pipes" },
-              { name: "Cables & Wires", image: "/placeholder.svg?height=120&width=120&text=Cables" },
-              { name: "Window Profiles", image: "/placeholder.svg?height=120&width=120&text=Windows" },
-              { name: "Paints & Coatings", image: "/placeholder.svg?height=120&width=120&text=Paints" },
-              { name: "Rubber Industry", image: "/placeholder.svg?height=120&width=120&text=Rubber" },
-              { name: "Plastic Industry", image: "/placeholder.svg?height=120&width=120&text=Plastic" },
+              { name: "Pipes & Fittings", image: "/placeholder.svg?height=120&width=120&text=Pipes", color: "border-blue-400", bgColor: "bg-blue-50" },
+              { name: "Cables & Wires", image: "/placeholder.svg?height=120&width=120&text=Cables", color: "border-yellow-400", bgColor: "bg-yellow-50" },
+              { name: "Window Profiles", image: "/placeholder.svg?height=120&width=120&text=Windows", color: "border-purple-400", bgColor: "bg-purple-50" },
+              { name: "Paints & Coatings", image: "/placeholder.svg?height=120&width=120&text=Paints", color: "border-red-400", bgColor: "bg-red-50" },
+              { name: "Rubber Industry", image: "/placeholder.svg?height=120&width=120&text=Rubber", color: "border-orange-400", bgColor: "bg-orange-50" },
+              { name: "Plastic Industry", image: "/placeholder.svg?height=120&width=120&text=Plastic", color: "border-teal-400", bgColor: "bg-teal-50" },
             ].map((industry, index) => (
               <FadeInSection key={index} delay={index * 100}>
-                <Card className="text-center hover:shadow-lg hover:shadow-green-200/50 transition-all duration-300 cursor-pointer group transform hover:scale-105 border-green-200 hover:border-green-400 bg-white consistent-card dynamic-hover">
+                <Card className={`text-center hover:shadow-lg transition-all duration-300 cursor-pointer group transform hover:scale-105 ${industry.color} hover:border-opacity-100 ${industry.bgColor} consistent-card dynamic-hover`}>
                   <CardHeader className="consistent-card-header pb-4 p-3 md:p-6">
                     <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-3 md:mb-4 overflow-hidden rounded-full border-2 border-green-200 group-hover:border-green-400 transition-colors duration-300 flex items-center justify-center">
                       <Image
@@ -386,8 +392,7 @@ export default function HomePage() {
         </div>
       </section>
       {/* Our Clients Section */}
-      <section className="py-12 md:py-20 bg-green-50">
-        <div className="container mx-auto px-4">
+<section className="py-12 md:py-20 bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">        <div className="container mx-auto px-4">
           <FadeInSection>
             <ClientCarousel />
           </FadeInSection>
@@ -414,6 +419,7 @@ export default function HomePage() {
                   {
                     icon: Phone,
                     title: "Call Us",
+                    iconBg: "bg-blue-600",
                     content: (
                       <div className="text-green-200 space-y-1">
                         <div>
@@ -435,7 +441,8 @@ export default function HomePage() {
                   },
                   {
                     icon: Mail,
-                    title: "Email Us",
+                    title: "Email Us", 
+                    iconBg: "bg-orange-600",
                     content: (
                       <div className="text-green-200 space-y-1">
                         <div>
@@ -454,6 +461,7 @@ export default function HomePage() {
                   {
                     icon: MapPin,
                     title: "Visit Us",
+                    iconBg: "bg-purple-600",
                     content: (
                       <div className="text-green-200 space-y-1">
                         <div>6-18-043, Sikh Village, Secunderabad</div>
@@ -464,7 +472,7 @@ export default function HomePage() {
                 ].map((contact, index) => (
                   <FadeInSection key={index} delay={index * 200} direction="left">
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 md:w-12 md:h-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className={`w-10 h-10 md:w-12 md:h-12 ${contact.iconBg} rounded-lg flex items-center justify-center flex-shrink-0`}>
                         <contact.icon className="h-5 w-5 md:h-6 md:w-6" />
                       </div>
                       <div>
