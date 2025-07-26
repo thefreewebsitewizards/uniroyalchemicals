@@ -43,18 +43,18 @@ export default function AboutPage() {
       </section>
 
       {/* Company Stats with Animation */}
-      <section className="py-16 bg-green-50">
+      <section className="py-16 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             {[
-              { value: 40, suffix: "+", label: "Years of Experience" },
-              { value: 0, suffix: "", label: "Pan India Supply", text: "Pan India" },
-              { value: 50, suffix: "+", label: "Products" },
-              { value: 100, suffix: "+", label: "Employees" },
+              { value: 40, suffix: "+", label: "Years of Experience", color: "text-blue-600" },
+              { value: 0, suffix: "", label: "Pan India Supply", text: "Pan India", color: "text-purple-600" },
+              { value: 50, suffix: "+", label: "Products", color: "text-orange-600" },
+              { value: 100, suffix: "+", label: "Employees", color: "text-teal-600" },
             ].map((stat, index) => (
               <FadeInSection key={index} delay={index * 200}>
                 <div className="space-y-2 transform hover:scale-105 transition-all duration-300">
-                  <div className="text-4xl font-bold text-green-600 animate-bounce">
+                  <div className={`text-4xl font-bold ${stat.color} animate-bounce`}>
                     {stat.text || <AnimatedCounter end={stat.value} suffix={stat.suffix} />}
                   </div>
                   <div className="text-gray-700">{stat.label}</div>
@@ -118,10 +118,10 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { icon: Building, value: "6", label: "Acres", sublabel: "Area" },
-              { icon: Package, value: "5000", label: "MT PA", sublabel: "Production Capacity" },
-              { icon: Warehouse, value: "1000", label: "MT", sublabel: "Storage Capacity" },
-              { icon: UsersIcon, value: "50", label: "+", sublabel: "Personnel" },
+              { icon: Building, value: "6", label: "Acres", sublabel: "Area", color: "bg-blue-100", iconColor: "text-blue-600" },
+              { icon: Package, value: "5000", label: "MT PA", sublabel: "Production Capacity", color: "bg-orange-100", iconColor: "text-orange-600" },
+              { icon: Warehouse, value: "1000", label: "MT", sublabel: "Storage Capacity", color: "bg-purple-100", iconColor: "text-purple-600" },
+              { icon: UsersIcon, value: "50", label: "+", sublabel: "Personnel", color: "bg-teal-100", iconColor: "text-teal-600" },
             ].map((item, index) => (
               <FadeInSection key={index} delay={index * 200}>
                 <Card
@@ -129,8 +129,8 @@ export default function AboutPage() {
                   style={{ animationDelay: `${index * 0.5}s` }}
                 >
                   <CardContent className="p-6">
-                    <div className="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-4 animate-pulse">
-                      <item.icon className="h-6 w-6 text-white" />
+                    <div className={`w-12 h-12 ${item.color} rounded-lg flex items-center justify-center mx-auto mb-4 animate-pulse`}>
+                      <item.icon className={`h-6 w-6 ${item.iconColor}`} />
                     </div>
                     <div className="text-2xl md:text-3xl font-bold text-white mb-2">
                       <AnimatedCounter
@@ -149,7 +149,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission, Vision, Values with Enhanced Animations */}
-      <section className="py-20 bg-green-50">
+      <section className="py-20 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
         <div className="container mx-auto px-4">
           <FadeInSection className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-green-700 mb-4 animate-fade-in">
@@ -167,27 +167,36 @@ export default function AboutPage() {
                 title: "Mission",
                 description:
                   "To develop and deliver innovative specialty chemical solutions that enable our customers to achieve superior performance while maintaining the highest standards of safety, quality, and environmental responsibility.",
+                color: "bg-blue-100",
+                iconColor: "text-blue-600",
+                borderColor: "border-blue-200"
               },
               {
                 icon: Globe,
                 title: "Vision",
                 description:
                   "To be the global leader in specialty chemicals, recognized for our innovation, reliability, and commitment to sustainable solutions that create value for customers, employees, and communities worldwide.",
+                color: "bg-purple-100",
+                iconColor: "text-purple-600",
+                borderColor: "border-purple-200"
               },
               {
                 icon: CheckCircle,
                 title: "Values",
                 description: "Innovation & Excellence • Safety & Sustainability • Customer Focus • Integrity & Trust",
+                color: "bg-orange-100",
+                iconColor: "text-orange-600",
+                borderColor: "border-orange-200"
               },
             ].map((item, index) => (
               <FadeInSection key={index} delay={index * 200}>
                 <Card
-                  className="text-center border-green-200 hover:border-green-400 hover:shadow-lg hover:shadow-green-200/50 transition-all duration-300 h-full bg-white transform hover:scale-105 animate-float"
+                  className={`text-center ${item.borderColor} hover:border-${item.iconColor.split('-')[1]}-400 hover:shadow-lg hover:shadow-${item.iconColor.split('-')[1]}-200/50 transition-all duration-300 h-full bg-white transform hover:scale-105 animate-float`}
                   style={{ animationDelay: `${index * 0.3}s` }}
                 >
                   <CardHeader>
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-                      <item.icon className="h-8 w-8 text-green-600" />
+                    <div className={`w-16 h-16 ${item.color} rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse`}>
+                      <item.icon className={`h-8 w-8 ${item.iconColor}`} />
                     </div>
                     <CardTitle className="text-2xl text-green-700">{item.title}</CardTitle>
                   </CardHeader>
@@ -217,22 +226,27 @@ export default function AboutPage() {
                 name: "B Sri Krishna",
                 title: "MD, CEO",
                 experience: "Visionary leader with extensive experience in chemical industry",
+                color: "bg-blue-100",
+                iconColor: "text-blue-600",
+                borderColor: "border-blue-200"
               },
               {
                 name: "B Venkatapatiraju",
                 title: "Director – Marketing, Strategy",
                 experience: "Strategic marketing expert with deep industry knowledge",
+                color: "bg-teal-100",
+                iconColor: "text-teal-600",
+                borderColor: "border-teal-200"
               },
             ].map((leader, index) => (
               <FadeInSection key={index} delay={index * 200}>
                 <Card
-                  className="text-center border-green-200 hover:border-green-400 hover:shadow-lg hover:shadow-green-200/50 transition-all duration-300 bg-white transform hover:scale-105 animate-float"
+                  className={`text-center ${leader.borderColor} hover:border-${leader.iconColor.split('-')[1]}-400 hover:shadow-lg hover:shadow-${leader.iconColor.split('-')[1]}-200/50 transition-all duration-300 bg-white transform hover:scale-105 animate-float`}
                   style={{ animationDelay: `${index * 0.4}s` }}
                 >
                   <CardHeader>
-                    <div className="w-24 h-24 bg-green-100 rounded-full mx-auto mb-4 flex items-center justify-center animate-pulse">
-                      {/* Placeholder for leader photos - replace with actual photos */}
-                      <span className="text-green-700 font-bold text-lg">
+                    <div className={`w-24 h-24 ${leader.color} rounded-full mx-auto mb-4 flex items-center justify-center animate-pulse`}>
+                      <span className={`${leader.iconColor} font-bold text-lg`}>
                         {leader.name
                           .split(" ")
                           .map((n) => n[0])

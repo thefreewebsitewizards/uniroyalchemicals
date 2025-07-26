@@ -16,23 +16,107 @@ export default function QualityPage() {
       title: "Raw Material Testing",
       description: "Rigorous testing of all incoming raw materials to ensure compliance with specifications",
       icon: FileText,
+      color: "blue"
     },
     {
       title: "In-Process Quality Control",
       description: "Continuous monitoring and testing during manufacturing processes",
       icon: Target,
+      color: "green"
     },
     {
       title: "Final Product Testing",
       description: "Comprehensive testing of finished products before dispatch",
       icon: CheckCircle,
+      color: "purple"
     },
     {
       title: "Customer Feedback Integration",
       description: "Continuous improvement based on customer feedback and market requirements",
       icon: Users,
+      color: "orange"
     },
   ]
+
+  const testingFacilities = [
+    {
+      icon: Zap,
+      title: "Physical Testing",
+      description: "Comprehensive physical property testing including tensile strength, impact resistance, and thermal stability.",
+      color: "blue"
+    },
+    {
+      icon: FileText,
+      title: "Chemical Analysis",
+      description: "Advanced chemical analysis using spectroscopy, chromatography, and other analytical techniques.",
+      color: "purple"
+    },
+    {
+      icon: Target,
+      title: "Performance Testing",
+      description: "Real-world performance testing to validate product effectiveness in actual applications.",
+      color: "orange"
+    },
+  ]
+
+  const qualityDocs = [
+    { name: "Certificate of Analysis (COA)", color: "blue" },
+    { name: "Material Safety Data Sheet (MSDS)", color: "green" },
+    { name: "Quality Management Manuals", color: "purple" },
+    { name: "Test Reports", color: "orange" },
+    { name: "Compliance Certificates", color: "blue" },
+    { name: "Process Documentation", color: "green" },
+  ]
+
+  const getColorClasses = (color: string) => {
+    const colorMap = {
+      blue: {
+        bg: "bg-blue-50",
+        border: "border-blue-200",
+        text: "text-blue-600",
+        icon: "text-blue-600",
+        badge: "bg-blue-100 text-blue-800",
+        button: "bg-blue-600 hover:bg-blue-700",
+        shadow: "hover:shadow-blue-200",
+        accent: "bg-blue-600",
+        hover: "hover:border-blue-400"
+      },
+      green: {
+        bg: "bg-green-50",
+        border: "border-green-200",
+        text: "text-green-600",
+        icon: "text-green-600",
+        badge: "bg-green-100 text-green-800",
+        button: "bg-green-600 hover:bg-green-700",
+        shadow: "hover:shadow-green-200",
+        accent: "bg-green-600",
+        hover: "hover:border-green-400"
+      },
+      purple: {
+        bg: "bg-purple-50",
+        border: "border-purple-200",
+        text: "text-purple-600",
+        icon: "text-purple-600",
+        badge: "bg-purple-100 text-purple-800",
+        button: "bg-purple-600 hover:bg-purple-700",
+        shadow: "hover:shadow-purple-200",
+        accent: "bg-purple-600",
+        hover: "hover:border-purple-400"
+      },
+      orange: {
+        bg: "bg-orange-50",
+        border: "border-orange-200",
+        text: "text-orange-600",
+        icon: "text-orange-600",
+        badge: "bg-orange-100 text-orange-800",
+        button: "bg-orange-600 hover:bg-orange-700",
+        shadow: "hover:shadow-orange-200",
+        accent: "bg-orange-600",
+        hover: "hover:border-orange-400"
+      }
+    }
+    return colorMap[color as keyof typeof colorMap] || colorMap.green
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -70,24 +154,27 @@ export default function QualityPage() {
           </FadeInSection>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {qualityProcesses.map((process, index) => (
-              <FadeInSection key={index} delay={index * 200}>
-                <Card className="border-green-200 hover:border-green-400 hover:shadow-lg hover:shadow-green-200/50 transition-all duration-300 transform hover:scale-105 bg-white">
-                  <CardHeader className="text-center">
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 relative">
-                      <process.icon className="h-8 w-8 text-green-600" />
-                      <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-600 rounded-full flex items-center justify-center">
-                        <span className="text-white text-xs font-bold">{index + 1}</span>
+            {qualityProcesses.map((process, index) => {
+              const colorClasses = getColorClasses(process.color)
+              return (
+                <FadeInSection key={index} delay={index * 200}>
+                  <Card className={`${colorClasses.border} ${colorClasses.hover} hover:shadow-lg ${colorClasses.shadow}/50 transition-all duration-300 transform hover:scale-105 bg-white`}>
+                    <CardHeader className="text-center">
+                      <div className={`w-16 h-16 ${colorClasses.bg} rounded-full flex items-center justify-center mx-auto mb-4 relative`}>
+                        <process.icon className={`h-8 w-8 ${colorClasses.icon}`} />
+                        <div className={`absolute -top-2 -right-2 w-6 h-6 ${colorClasses.accent} rounded-full flex items-center justify-center`}>
+                          <span className="text-white text-xs font-bold">{index + 1}</span>
+                        </div>
                       </div>
-                    </div>
-                    <CardTitle className="text-lg text-green-700">{process.title}</CardTitle>
-                    <CardDescription className="text-sm leading-relaxed text-gray-600">
-                      {process.description}
-                    </CardDescription>
-                  </CardHeader>
-                </Card>
-              </FadeInSection>
-            ))}
+                      <CardTitle className={`text-lg ${colorClasses.text}`}>{process.title}</CardTitle>
+                      <CardDescription className="text-sm leading-relaxed text-gray-600">
+                        {process.description}
+                      </CardDescription>
+                    </CardHeader>
+                  </Card>
+                </FadeInSection>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -160,37 +247,22 @@ export default function QualityPage() {
           </FadeInSection>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Zap,
-                title: "Physical Testing",
-                description:
-                  "Comprehensive physical property testing including tensile strength, impact resistance, and thermal stability.",
-              },
-              {
-                icon: FileText,
-                title: "Chemical Analysis",
-                description:
-                  "Advanced chemical analysis using spectroscopy, chromatography, and other analytical techniques.",
-              },
-              {
-                icon: Target,
-                title: "Performance Testing",
-                description: "Real-world performance testing to validate product effectiveness in actual applications.",
-              },
-            ].map((facility, index) => (
-              <FadeInSection key={index} delay={index * 200}>
-                <Card className="border-green-200 hover:border-green-400 hover:shadow-lg hover:shadow-green-200/50 transition-all duration-300 transform hover:scale-105 bg-white">
-                  <CardHeader className="text-center">
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <facility.icon className="h-8 w-8 text-green-600" />
-                    </div>
-                    <CardTitle className="text-green-700">{facility.title}</CardTitle>
-                    <CardDescription className="text-gray-600">{facility.description}</CardDescription>
-                  </CardHeader>
-                </Card>
-              </FadeInSection>
-            ))}
+            {testingFacilities.map((facility, index) => {
+              const colorClasses = getColorClasses(facility.color)
+              return (
+                <FadeInSection key={index} delay={index * 200}>
+                  <Card className={`${colorClasses.border} ${colorClasses.hover} hover:shadow-lg ${colorClasses.shadow}/50 transition-all duration-300 transform hover:scale-105 bg-white`}>
+                    <CardHeader className="text-center">
+                      <div className={`w-16 h-16 ${colorClasses.bg} rounded-full flex items-center justify-center mx-auto mb-4`}>
+                        <facility.icon className={`h-8 w-8 ${colorClasses.icon}`} />
+                      </div>
+                      <CardTitle className={colorClasses.text}>{facility.title}</CardTitle>
+                      <CardDescription className="text-gray-600">{facility.description}</CardDescription>
+                    </CardHeader>
+                  </Card>
+                </FadeInSection>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -206,34 +278,30 @@ export default function QualityPage() {
           </FadeInSection>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              "Certificate of Analysis (COA)",
-              "Material Safety Data Sheet (MSDS)",
-              "Quality Management Manuals",
-              "Test Reports",
-              "Compliance Certificates",
-              "Process Documentation",
-            ].map((doc, index) => (
-              <FadeInSection key={index} delay={index * 150}>
-                <Card className="border-green-200 hover:border-green-400 hover:shadow-lg hover:shadow-green-200/50 transition-all duration-300 cursor-pointer transform hover:scale-105 bg-white">
-                  <CardHeader className="text-center">
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <FileText className="h-8 w-8 text-green-600" />
-                    </div>
-                    <CardTitle className="text-lg text-green-700">{doc}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-center">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="hover:bg-green-600 hover:text-white border-green-600 text-green-600 bg-transparent"
-                    >
-                      Request Document
-                    </Button>
-                  </CardContent>
-                </Card>
-              </FadeInSection>
-            ))}
+            {qualityDocs.map((doc, index) => {
+              const colorClasses = getColorClasses(doc.color)
+              return (
+                <FadeInSection key={index} delay={index * 150}>
+                  <Card className={`${colorClasses.border} ${colorClasses.hover} hover:shadow-lg ${colorClasses.shadow}/50 transition-all duration-300 cursor-pointer transform hover:scale-105 bg-white`}>
+                    <CardHeader className="text-center">
+                      <div className={`w-16 h-16 ${colorClasses.bg} rounded-full flex items-center justify-center mx-auto mb-4`}>
+                        <FileText className={`h-8 w-8 ${colorClasses.icon}`} />
+                      </div>
+                      <CardTitle className={`text-lg ${colorClasses.text}`}>{doc.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-center">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className={`${colorClasses.button} text-white border-transparent bg-transparent hover:${colorClasses.button.split(' ')[1]} ${colorClasses.border} ${colorClasses.text} hover:text-white`}
+                      >
+                        Request Document
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </FadeInSection>
+              )
+            })}
           </div>
         </div>
       </section>

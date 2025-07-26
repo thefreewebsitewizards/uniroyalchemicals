@@ -19,6 +19,9 @@ export default function ContactPage() {
       hours: "Mon-Fri: 9:00 AM - 6:00 PM IST",
       mapUrl:
         "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.4234567890123!2d78.4867!3d17.4375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDI2JzE1LjAiTiA3OMKwMjknMTIuMCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin",
+      color: "bg-blue-100",
+      iconColor: "text-blue-600",
+      borderColor: "border-blue-200"
     },
     {
       name: "Factory Location",
@@ -28,6 +31,9 @@ export default function ContactPage() {
       hours: "Mon-Fri: 8:00 AM - 5:00 PM IST",
       mapUrl:
         "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.1234567890123!2d78.5234!3d17.4567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDI3JzI0LjEiTiA3OMKwMzEnMjQuMyJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin",
+      color: "bg-orange-100",
+      iconColor: "text-orange-600",
+      borderColor: "border-orange-200"
     },
     {
       name: "Additional Contact",
@@ -36,6 +42,9 @@ export default function ContactPage() {
       email: "info@uniroyalchemicals.com",
       hours: "Mon-Fri: 9:00 AM - 6:00 PM IST",
       mapUrl: "",
+      color: "bg-purple-100",
+      iconColor: "text-purple-600",
+      borderColor: "border-purple-200"
     },
   ]
 
@@ -46,6 +55,9 @@ export default function ContactPage() {
       description: "Speak directly with our technical experts",
       contact: "+91 9493015165 | +91 6304894331",
       availability: "Mon-Fri, 9 AM - 6 PM IST",
+      color: "bg-blue-100",
+      iconColor: "text-blue-600",
+      borderColor: "border-blue-200"
     },
     {
       icon: Mail,
@@ -53,6 +65,9 @@ export default function ContactPage() {
       description: "Get detailed responses to your inquiries",
       contact: "info@uniroyalchemicals.com | uniroyalindia@gmail.com",
       availability: "24/7 - Response within 24 hours",
+      color: "bg-orange-100",
+      iconColor: "text-orange-600",
+      borderColor: "border-orange-200"
     },
     {
       icon: MessageSquare,
@@ -60,6 +75,9 @@ export default function ContactPage() {
       description: "Instant support via WhatsApp",
       contact: "Available on website",
       availability: "Mon-Fri, 9 AM - 5 PM IST",
+      color: "bg-purple-100",
+      iconColor: "text-purple-600",
+      borderColor: "border-purple-200"
     },
     {
       icon: Globe,
@@ -67,6 +85,9 @@ export default function ContactPage() {
       description: "Schedule a visit to our manufacturing facility",
       contact: "Kandlakoya Village, Medchal",
       availability: "By appointment only",
+      color: "bg-teal-100",
+      iconColor: "text-teal-600",
+      borderColor: "border-teal-200"
     },
   ]
 
@@ -93,7 +114,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Methods with Enhanced Animation */}
-      <section className="py-12 md:py-20 bg-green-50">
+      <section className="py-12 md:py-20 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
         <div className="container mx-auto px-4">
           <FadeInSection className="text-center mb-12 md:mb-16">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-green-700 mb-4 animate-fade-in">
@@ -109,12 +130,12 @@ export default function ContactPage() {
             {contactMethods.map((method, index) => (
               <FadeInSection key={index} delay={index * 200}>
                 <Card
-                  className="text-center border-green-200 hover:border-green-400 hover:shadow-lg hover:shadow-green-200/50 transition-all duration-300 transform hover:scale-105 animate-float bg-white"
+                  className={`text-center ${method.borderColor} hover:border-${method.iconColor.split('-')[1]}-400 hover:shadow-lg hover:shadow-${method.iconColor.split('-')[1]}-200/50 transition-all duration-300 transform hover:scale-105 animate-float bg-white`}
                   style={{ animationDelay: `${index * 0.3}s` }}
                 >
                   <CardHeader className="p-4 md:p-6">
-                    <div className="w-12 h-12 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-                      <method.icon className="h-6 w-6 md:h-8 md:w-8 text-green-600" />
+                    <div className={`w-12 h-12 md:w-16 md:h-16 ${method.color} rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse`}>
+                      <method.icon className={`h-6 w-6 md:h-8 md:w-8 ${method.iconColor}`} />
                     </div>
                     <CardTitle className="text-lg md:text-xl text-green-700">{method.title}</CardTitle>
                     <CardDescription className="text-sm md:text-base text-gray-600">
@@ -123,7 +144,7 @@ export default function ContactPage() {
                   </CardHeader>
                   <CardContent className="p-4 md:p-6 pt-0">
                     <div className="space-y-2">
-                      <p className="font-medium text-green-600 text-sm md:text-base">{method.contact}</p>
+                      <p className={`font-medium ${method.iconColor} text-sm md:text-base`}>{method.contact}</p>
                       <p className="text-xs md:text-sm text-gray-500">{method.availability}</p>
                     </div>
                   </CardContent>
@@ -156,11 +177,16 @@ export default function ContactPage() {
                     {offices.map((office, index) => (
                       <Card
                         key={office.name}
-                        className="border-green-200 hover:border-green-400 hover:shadow-lg hover:shadow-green-200/50 transition-all duration-300 transform hover:scale-105 animate-slide-up bg-white"
+                        className={`${office.borderColor} hover:border-${office.iconColor.split('-')[1]}-400 hover:shadow-lg hover:shadow-${office.iconColor.split('-')[1]}-200/50 transition-all duration-300 transform hover:scale-105 animate-slide-up bg-white`}
                         style={{ animationDelay: `${index * 0.2}s` }}
                       >
                         <CardHeader className="p-4 md:p-6">
-                          <CardTitle className="text-base md:text-lg text-green-600">{office.name}</CardTitle>
+                          <div className="flex items-center gap-3">
+                            <div className={`w-8 h-8 ${office.color} rounded-full flex items-center justify-center`}>
+                              <MapPin className={`h-4 w-4 ${office.iconColor}`} />
+                            </div>
+                            <CardTitle className={`text-base md:text-lg ${office.iconColor}`}>{office.name}</CardTitle>
+                          </div>
                         </CardHeader>
                         <CardContent className="space-y-3 p-4 md:p-6 pt-0">
                           <div className="flex items-start gap-3">
@@ -192,7 +218,7 @@ export default function ContactPage() {
                   {offices.slice(0, 2).map((office, index) => (
                     <FadeInSection key={office.name} delay={index * 300}>
                       <div className="space-y-4">
-                        <h4 className="text-base md:text-lg font-semibold text-green-600">{office.name}</h4>
+                        <h4 className={`text-base md:text-lg font-semibold ${office.iconColor}`}>{office.name}</h4>
                         {office.mapUrl && (
                           <div className="relative h-48 md:h-64 bg-gray-200 rounded-lg overflow-hidden shadow-lg transform hover:scale-105 transition-all duration-300">
                             <iframe
@@ -207,7 +233,7 @@ export default function ContactPage() {
                             />
                           </div>
                         )}
-                        <div className="bg-green-50 p-4 rounded-lg border border-green-200 animate-slide-up">
+                        <div className={`${office.color} p-4 rounded-lg border ${office.borderColor} animate-slide-up`}>
                           <p className="text-gray-700 font-medium text-sm md:text-base">{office.address}</p>
                           <div className="flex flex-wrap gap-4 mt-2 text-xs md:text-sm text-gray-600">
                             <span>📞 {office.phone}</span>
@@ -218,9 +244,9 @@ export default function ContactPage() {
                     </FadeInSection>
                   ))}
 
-                  <div className="bg-green-50 p-4 md:p-6 rounded-lg border-l-4 border-green-600 animate-slide-up">
-                    <h4 className="font-semibold text-green-800 mb-2 text-sm md:text-base">Need Directions?</h4>
-                    <p className="text-green-700 text-xs md:text-sm">
+                  <div className="bg-teal-50 p-4 md:p-6 rounded-lg border-l-4 border-teal-600 animate-slide-up">
+                    <h4 className="font-semibold text-teal-800 mb-2 text-sm md:text-base">Need Directions?</h4>
+                    <p className="text-teal-700 text-xs md:text-sm">
                       Our factory is conveniently located adjacent to NH44 and close to the Outer Ring Road (ORR) for
                       easy access.
                     </p>
@@ -233,7 +259,7 @@ export default function ContactPage() {
       </section>
 
       {/* FAQ Section with Animation */}
-      <section className="py-12 md:py-20 bg-green-50">
+      <section className="py-12 md:py-20 bg-gradient-to-r from-white via-green-50 to-blue-50">
         <div className="container mx-auto px-4">
           <FadeInSection className="text-center mb-12 md:mb-16">
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-green-700 mb-4 animate-fade-in">
@@ -250,43 +276,66 @@ export default function ContactPage() {
                 question: "What is your minimum order quantity?",
                 answer:
                   "Minimum order quantities vary by product. Contact our sales team for specific MOQ information for your required products.",
+                color: "bg-blue-100",
+                iconColor: "text-blue-600",
+                borderColor: "border-blue-200"
               },
               {
                 question: "Do you provide technical support?",
                 answer:
                   "Yes, we offer comprehensive technical support including application guidance, troubleshooting, and custom formulation development.",
+                color: "bg-orange-100",
+                iconColor: "text-orange-600",
+                borderColor: "border-orange-200"
               },
               {
                 question: "What certifications do your products have?",
                 answer:
                   "Our products meet various international standards including ISO, FDA, REACH, and industry-specific certifications. Specific certifications vary by product.",
+                color: "bg-purple-100",
+                iconColor: "text-purple-600",
+                borderColor: "border-purple-200"
               },
               {
                 question: "Can you develop custom formulations?",
                 answer:
                   "Absolutely. Our R&D team specializes in developing custom chemical solutions tailored to specific customer requirements and applications.",
+                color: "bg-teal-100",
+                iconColor: "text-teal-600",
+                borderColor: "border-teal-200"
               },
               {
                 question: "What are your typical lead times?",
                 answer:
                   "Lead times vary by product and quantity. Standard products typically ship within 2-4 weeks, while custom formulations may require 6-12 weeks.",
+                color: "bg-blue-100",
+                iconColor: "text-blue-600",
+                borderColor: "border-blue-200"
               },
               {
                 question: "Do you offer samples for testing?",
                 answer:
                   "Yes, we provide samples for qualified customers to evaluate our products in their specific applications before placing orders.",
+                color: "bg-orange-100",
+                iconColor: "text-orange-600",
+                borderColor: "border-orange-200"
               },
             ].map((faq, index) => (
               <FadeInSection key={index} delay={index * 150}>
                 <Card
-                  className="border-green-200 hover:border-green-400 hover:shadow-lg hover:shadow-green-200/50 transition-all duration-300 transform hover:scale-105 animate-float bg-white"
+                  className={`${faq.borderColor} hover:border-${faq.iconColor.split('-')[1]}-400 hover:shadow-lg hover:shadow-${faq.iconColor.split('-')[1]}-200/50 transition-all duration-300 transform hover:scale-105 animate-float bg-white`}
                   style={{ animationDelay: `${index * 0.2}s` }}
                 >
                   <CardHeader className="p-4 md:p-6">
-                    <CardTitle className="text-base md:text-lg text-green-600">{faq.question}</CardTitle>
+                    <div className="flex items-start gap-3">
+                      <div className={`w-6 h-6 ${faq.color} rounded-full flex items-center justify-center mt-1 flex-shrink-0`}>
+                        <span className={`text-xs font-bold ${faq.iconColor}`}>?</span>
+                      </div>
+                      <CardTitle className={`text-base md:text-lg ${faq.iconColor}`}>{faq.question}</CardTitle>
+                    </div>
                   </CardHeader>
                   <CardContent className="p-4 md:p-6 pt-0">
-                    <p className="text-gray-600 leading-relaxed text-sm md:text-base">{faq.answer}</p>
+                    <p className="text-gray-600 leading-relaxed text-sm md:text-base ml-9">{faq.answer}</p>
                   </CardContent>
                 </Card>
               </FadeInSection>

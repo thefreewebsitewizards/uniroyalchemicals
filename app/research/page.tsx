@@ -18,24 +18,28 @@ export default function ResearchPage() {
         "Developing eco-friendly alternatives to traditional PVC additives with reduced environmental impact",
       icon: Lightbulb,
       focus: ["Bio-based Plasticisers", "Green Stabilisers", "Recyclable Compounds"],
+      color: "green"
     },
     {
       title: "Performance Enhancement",
       description: "Advanced formulations for improved mechanical properties and durability",
       icon: TrendingUp,
       focus: ["Impact Modifiers", "Thermal Stabilisers", "Weather Resistance"],
+      color: "blue"
     },
     {
       title: "Specialty Applications",
       description: "Custom solutions for niche markets and specialized industrial applications",
       icon: Target,
       focus: ["Medical Grade", "Food Contact", "High-Temperature Applications"],
+      color: "purple"
     },
     {
       title: "Process Innovation",
       description: "Optimizing manufacturing processes for better efficiency and quality",
       icon: Zap,
       focus: ["Process Optimization", "Quality Enhancement", "Cost Reduction"],
+      color: "orange"
     },
   ]
 
@@ -44,23 +48,85 @@ export default function ResearchPage() {
       name: "Material Science Laboratory",
       description: "Advanced laboratory for polymer research and additive development",
       equipment: ["Rheometer", "DSC", "TGA", "FTIR Spectroscopy"],
+      color: "blue"
     },
     {
       name: "Formulation Development",
       description: "Custom formulation capabilities for specific customer requirements",
       equipment: ["High-Speed Mixers", "Twin-Screw Extruders", "Injection Molding"],
+      color: "green"
     },
     {
       name: "Performance Testing",
       description: "Comprehensive testing facilities for product validation",
       equipment: ["Tensile Testing", "Impact Testing", "Thermal Analysis", "Weathering Chamber"],
+      color: "purple"
     },
     {
       name: "Pilot Plant Facility",
       description: "Scale-up capabilities from laboratory to commercial production",
       equipment: ["Pilot Reactors", "Distillation Units", "Filtration Systems", "Packaging Lines"],
+      color: "orange"
     },
   ]
+
+  const innovationPhases = [
+    { step: "1", title: "Concept", description: "Identifying market needs and opportunities", color: "blue" },
+    { step: "2", title: "Research", description: "Laboratory research and formulation development", color: "green" },
+    { step: "3", title: "Testing", description: "Comprehensive performance and quality testing", color: "purple" },
+    { step: "4", title: "Scale-up", description: "Pilot plant trials and process optimization", color: "orange" },
+    { step: "5", title: "Launch", description: "Commercial production and market introduction", color: "blue" },
+  ]
+
+  const getColorClasses = (color: string) => {
+    const colorMap = {
+      blue: {
+        bg: "bg-blue-50",
+        border: "border-blue-200",
+        text: "text-blue-600",
+        icon: "text-blue-600",
+        badge: "bg-blue-100 text-blue-800",
+        button: "bg-blue-600 hover:bg-blue-700",
+        shadow: "hover:shadow-blue-200",
+        accent: "bg-blue-600",
+        hover: "hover:border-blue-400"
+      },
+      green: {
+        bg: "bg-green-50",
+        border: "border-green-200",
+        text: "text-green-600",
+        icon: "text-green-600",
+        badge: "bg-green-100 text-green-800",
+        button: "bg-green-600 hover:bg-green-700",
+        shadow: "hover:shadow-green-200",
+        accent: "bg-green-600",
+        hover: "hover:border-green-400"
+      },
+      purple: {
+        bg: "bg-purple-50",
+        border: "border-purple-200",
+        text: "text-purple-600",
+        icon: "text-purple-600",
+        badge: "bg-purple-100 text-purple-800",
+        button: "bg-purple-600 hover:bg-purple-700",
+        shadow: "hover:shadow-purple-200",
+        accent: "bg-purple-600",
+        hover: "hover:border-purple-400"
+      },
+      orange: {
+        bg: "bg-orange-50",
+        border: "border-orange-200",
+        text: "text-orange-600",
+        icon: "text-orange-600",
+        badge: "bg-orange-100 text-orange-800",
+        button: "bg-orange-600 hover:bg-orange-700",
+        shadow: "hover:shadow-orange-200",
+        accent: "bg-orange-600",
+        hover: "hover:border-orange-400"
+      }
+    }
+    return colorMap[color as keyof typeof colorMap] || colorMap.green
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -98,37 +164,40 @@ export default function ResearchPage() {
           </FadeInSection>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {researchAreas.map((area, index) => (
-              <FadeInSection key={index} delay={index * 200}>
-                <Card className="border-green-200 hover:border-green-400 hover:shadow-lg hover:shadow-green-200/50 transition-all duration-300 transform hover:scale-105 bg-white">
-                  <CardHeader>
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                        <area.icon className="h-6 w-6 text-green-600" />
+            {researchAreas.map((area, index) => {
+              const colorClasses = getColorClasses(area.color)
+              return (
+                <FadeInSection key={index} delay={index * 200}>
+                  <Card className={`${colorClasses.border} ${colorClasses.hover} hover:shadow-lg ${colorClasses.shadow}/50 transition-all duration-300 transform hover:scale-105 bg-white`}>
+                    <CardHeader>
+                      <div className="flex items-start gap-4">
+                        <div className={`w-12 h-12 ${colorClasses.bg} rounded-lg flex items-center justify-center`}>
+                          <area.icon className={`h-6 w-6 ${colorClasses.icon}`} />
+                        </div>
+                        <div className="flex-1">
+                          <CardTitle className={`text-xl mb-2 ${colorClasses.text}`}>{area.title}</CardTitle>
+                          <CardDescription className="text-base leading-relaxed text-gray-600">
+                            {area.description}
+                          </CardDescription>
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <CardTitle className="text-xl mb-2 text-green-700">{area.title}</CardTitle>
-                        <CardDescription className="text-base leading-relaxed text-gray-600">
-                          {area.description}
-                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <h4 className={`font-semibold ${colorClasses.text}`}>Key Focus Areas:</h4>
+                        <div className="flex flex-wrap gap-2">
+                          {area.focus.map((item) => (
+                            <Badge key={item} variant="secondary" className={`text-xs ${colorClasses.badge}`}>
+                              {item}
+                            </Badge>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <h4 className="font-semibold text-green-700">Key Focus Areas:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {area.focus.map((item) => (
-                          <Badge key={item} variant="secondary" className="text-xs bg-green-100 text-green-700">
-                            {item}
-                          </Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </FadeInSection>
-            ))}
+                    </CardContent>
+                  </Card>
+                </FadeInSection>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -145,36 +214,39 @@ export default function ResearchPage() {
           </FadeInSection>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {capabilities.map((capability, index) => (
-              <FadeInSection key={index} delay={index * 200}>
-                <Card className="border-green-200 hover:border-green-400 hover:shadow-lg hover:shadow-green-200/50 transition-all duration-300 transform hover:scale-105 bg-white">
-                  <CardHeader>
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                        <Beaker className="h-6 w-6 text-green-600" />
+            {capabilities.map((capability, index) => {
+              const colorClasses = getColorClasses(capability.color)
+              return (
+                <FadeInSection key={index} delay={index * 200}>
+                  <Card className={`${colorClasses.border} ${colorClasses.hover} hover:shadow-lg ${colorClasses.shadow}/50 transition-all duration-300 transform hover:scale-105 bg-white`}>
+                    <CardHeader>
+                      <div className="flex items-start gap-4">
+                        <div className={`w-12 h-12 ${colorClasses.bg} rounded-lg flex items-center justify-center`}>
+                          <Beaker className={`h-6 w-6 ${colorClasses.icon}`} />
+                        </div>
+                        <div className="flex-1">
+                          <CardTitle className={`text-lg mb-2 ${colorClasses.text}`}>{capability.name}</CardTitle>
+                          <CardDescription className="text-base text-gray-600">{capability.description}</CardDescription>
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <CardTitle className="text-lg mb-2 text-green-700">{capability.name}</CardTitle>
-                        <CardDescription className="text-base text-gray-600">{capability.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <h4 className={`font-semibold ${colorClasses.text}`}>Key Equipment:</h4>
+                        <div className="grid grid-cols-2 gap-2">
+                          {capability.equipment.map((item) => (
+                            <div key={item} className="flex items-center gap-2">
+                              <div className={`w-2 h-2 ${colorClasses.accent} rounded-full`}></div>
+                              <span className="text-sm text-gray-600">{item}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      <h4 className="font-semibold text-green-700">Key Equipment:</h4>
-                      <div className="grid grid-cols-2 gap-2">
-                        {capability.equipment.map((item) => (
-                          <div key={item} className="flex items-center gap-2">
-                            <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-                            <span className="text-sm text-gray-600">{item}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </FadeInSection>
-            ))}
+                    </CardContent>
+                  </Card>
+                </FadeInSection>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -190,28 +262,25 @@ export default function ResearchPage() {
           </FadeInSection>
 
           <div className="grid md:grid-cols-5 gap-8">
-            {[
-              { step: "1", title: "Concept", description: "Identifying market needs and opportunities" },
-              { step: "2", title: "Research", description: "Laboratory research and formulation development" },
-              { step: "3", title: "Testing", description: "Comprehensive performance and quality testing" },
-              { step: "4", title: "Scale-up", description: "Pilot plant trials and process optimization" },
-              { step: "5", title: "Launch", description: "Commercial production and market introduction" },
-            ].map((phase, index) => (
-              <FadeInSection key={index} delay={index * 200}>
-                <Card className="text-center border-green-200 hover:border-green-400 hover:shadow-lg hover:shadow-green-200/50 transition-all duration-300 transform hover:scale-105 relative bg-white">
-                  <CardHeader>
-                    <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4 relative">
-                      <span className="text-white font-bold text-lg">{phase.step}</span>
-                    </div>
-                    <CardTitle className="text-lg text-green-700">{phase.title}</CardTitle>
-                    <CardDescription className="text-sm text-gray-600">{phase.description}</CardDescription>
-                  </CardHeader>
-                  {phase.step !== "5" && (
-                    <div className="absolute top-8 -right-4 w-8 h-0.5 bg-green-600 hidden md:block"></div>
-                  )}
-                </Card>
-              </FadeInSection>
-            ))}
+            {innovationPhases.map((phase, index) => {
+              const colorClasses = getColorClasses(phase.color)
+              return (
+                <FadeInSection key={index} delay={index * 200}>
+                  <Card className={`text-center ${colorClasses.border} ${colorClasses.hover} hover:shadow-lg ${colorClasses.shadow}/50 transition-all duration-300 transform hover:scale-105 relative bg-white`}>
+                    <CardHeader>
+                      <div className={`w-16 h-16 ${colorClasses.accent} rounded-full flex items-center justify-center mx-auto mb-4 relative`}>
+                        <span className="text-white font-bold text-lg">{phase.step}</span>
+                      </div>
+                      <CardTitle className={`text-lg ${colorClasses.text}`}>{phase.title}</CardTitle>
+                      <CardDescription className="text-sm text-gray-600">{phase.description}</CardDescription>
+                    </CardHeader>
+                    {phase.step !== "5" && (
+                      <div className={`absolute top-8 -right-4 w-8 h-0.5 ${colorClasses.accent} hidden md:block`}></div>
+                    )}
+                  </Card>
+                </FadeInSection>
+              )
+            })}
           </div>
         </div>
       </section>

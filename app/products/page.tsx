@@ -22,6 +22,7 @@ export default function ProductsPage() {
       featured: true,
       image: "/placeholder.svg?height=200&width=300&text=Lead+Stabilisers",
       href: "/products/lead-stabilisers",
+      color: "blue"
     },
     {
       name: "Calcium Zinc Stabilisers",
@@ -30,6 +31,7 @@ export default function ProductsPage() {
       featured: true,
       image: "/placeholder.svg?height=200&width=300&text=Calcium+Zinc+Stabilisers",
       href: "/products/calcium-zinc-stabilisers",
+      color: "green"
     },
     {
       name: "Metallic Stearates",
@@ -39,6 +41,7 @@ export default function ProductsPage() {
       featured: true,
       image: "/placeholder.svg?height=200&width=300&text=Metallic+Stearates",
       href: "/products/metallic-stearates",
+      color: "purple"
     },
     {
       name: "Lubricants",
@@ -47,6 +50,7 @@ export default function ProductsPage() {
       featured: false,
       image: "/placeholder.svg?height=200&width=300&text=Lubricants",
       href: "/products/lubricants",
+      color: "orange"
     },
   ]
 
@@ -58,6 +62,7 @@ export default function ProductsPage() {
         "Cost-effective stabilizer for general PVC applications with excellent thermal stability and processing performance.",
       applications: ["Pipes", "Profiles", "Fittings"],
       datasheet: true,
+      color: "blue"
     },
     {
       name: "Calcium Zinc Stabiliser CZ-202",
@@ -65,6 +70,7 @@ export default function ProductsPage() {
       description: "Eco-friendly stabilizer for food-grade PVC products ensuring safety and regulatory compliance.",
       applications: ["Food Packaging", "Medical Devices", "Toys"],
       datasheet: true,
+      color: "green"
     },
     {
       name: "Lead Stearate MS-303",
@@ -72,6 +78,7 @@ export default function ProductsPage() {
       description: "High-performance lead stearate for PVC stabilization and lubrication in industrial applications.",
       applications: ["PVC Compounds", "Industrial Processing", "Stabilization"],
       datasheet: true,
+      color: "purple"
     },
     {
       name: "Lubricant L-404",
@@ -79,8 +86,55 @@ export default function ProductsPage() {
       description: "External lubricant for improved PVC processing with enhanced flow properties and surface finish.",
       applications: ["Extrusion", "Injection Molding", "Calendering"],
       datasheet: true,
+      color: "orange"
     },
   ]
+
+  const getColorClasses = (color: string) => {
+    const colorMap = {
+      blue: {
+        bg: "bg-blue-50",
+        border: "border-blue-200",
+        text: "text-blue-600",
+        icon: "text-blue-600",
+        badge: "bg-blue-100 text-blue-800",
+        button: "bg-blue-600 hover:bg-blue-700",
+        shadow: "hover:shadow-blue-200",
+        accent: "bg-blue-600"
+      },
+      green: {
+        bg: "bg-green-50",
+        border: "border-green-200",
+        text: "text-green-600",
+        icon: "text-green-600",
+        badge: "bg-green-100 text-green-800",
+        button: "bg-green-600 hover:bg-green-700",
+        shadow: "hover:shadow-green-200",
+        accent: "bg-green-600"
+      },
+      purple: {
+        bg: "bg-purple-50",
+        border: "border-purple-200",
+        text: "text-purple-600",
+        icon: "text-purple-600",
+        badge: "bg-purple-100 text-purple-800",
+        button: "bg-purple-600 hover:bg-purple-700",
+        shadow: "hover:shadow-purple-200",
+        accent: "bg-purple-600"
+      },
+      orange: {
+        bg: "bg-orange-50",
+        border: "border-orange-200",
+        text: "text-orange-600",
+        icon: "text-orange-600",
+        badge: "bg-orange-100 text-orange-800",
+        button: "bg-orange-600 hover:bg-orange-700",
+        shadow: "hover:shadow-orange-200",
+        accent: "bg-orange-600"
+      }
+    }
+    return colorMap[color as keyof typeof colorMap] || colorMap.green
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -120,8 +174,8 @@ export default function ProductsPage() {
                 <div className="relative flex-1">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                   <Input
-                    placeholder="Search products..."
-                    className="pl-10 bg-white/10 border-white/20 text-white placeholder-white/60 backdrop-blur-sm"
+                    placeholder="Search products"
+                    className="pl-10 bg-white/10 border-white/20 text-white placeholder-white backdrop-blur-sm"
                   />
                 </div>
                 <Button className="bg-white text-green-700 hover:bg-green-50">
@@ -145,53 +199,56 @@ export default function ProductsPage() {
           </FadeInSection>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {productCategories.map((category, index) => (
-              <FadeInSection key={index} delay={index * 150}>
-                <Card className="group hover:shadow-xl hover:shadow-green-200/50 transition-all duration-300 cursor-pointer border-green-200 hover:border-green-400 transform hover:scale-105 h-full bg-white">
-                  <div className="relative overflow-hidden">
-                    <Image
-                      src={category.image || "/placeholder.svg"}
-                      alt={category.name}
-                      width={300}
-                      height={200}
-                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    {category.featured && (
-                      <div className="absolute top-4 left-4">
-                        <Badge className="bg-green-600 text-white">
-                          <Star className="h-3 w-3 mr-1" />
-                          Featured
+            {productCategories.map((category, index) => {
+              const colorClasses = getColorClasses(category.color)
+              return (
+                <FadeInSection key={index} delay={index * 150}>
+                  <Card className={`group hover:shadow-xl ${colorClasses.shadow}/50 transition-all duration-300 cursor-pointer ${colorClasses.border} hover:${colorClasses.border.replace('200', '400')} transform hover:scale-105 h-full bg-white`}>
+                    <div className="relative overflow-hidden">
+                      <Image
+                        src={category.image || "/placeholder.svg"}
+                        alt={category.name}
+                        width={300}
+                        height={200}
+                        className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      {category.featured && (
+                        <div className="absolute top-4 left-4">
+                          <Badge className={`${colorClasses.accent} text-white`}>
+                            <Star className="h-3 w-3 mr-1" />
+                            Featured
+                          </Badge>
+                        </div>
+                      )}
+                      <div className="absolute top-4 right-4">
+                        <Badge variant="secondary" className={`bg-white/90 ${colorClasses.text}`}>
+                          {category.products} Products
                         </Badge>
                       </div>
-                    )}
-                    <div className="absolute top-4 right-4">
-                      <Badge variant="secondary" className="bg-white/90 text-green-700">
-                        {category.products} Products
-                      </Badge>
+                      <div className={`absolute inset-0 ${colorClasses.accent}/0 group-hover:${colorClasses.accent}/10 transition-colors duration-300`}></div>
                     </div>
-                    <div className="absolute inset-0 bg-green-600/0 group-hover:bg-green-600/10 transition-colors duration-300"></div>
-                  </div>
-                  <CardHeader>
-                    <CardTitle className="group-hover:text-green-700 transition-colors text-green-700">
-                      {category.name}
-                    </CardTitle>
-                    <CardDescription className="text-gray-600">{category.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button
-                      variant="outline"
-                      className="w-full group-hover:bg-green-600 group-hover:text-white group-hover:border-green-600 transition-colors border-green-600 text-green-600 bg-transparent"
-                      asChild
-                    >
-                      <Link href={category.href}>
-                        View Products
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              </FadeInSection>
-            ))}
+                    <CardHeader>
+                      <CardTitle className={`group-hover:${colorClasses.text} transition-colors ${colorClasses.text}`}>
+                        {category.name}
+                      </CardTitle>
+                      <CardDescription className="text-gray-600">{category.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Button
+                        variant="outline"
+                        className={`w-full group-hover:${colorClasses.accent} group-hover:text-white group-hover:${colorClasses.border.replace('200', '600')} transition-colors ${colorClasses.border.replace('200', '600')} ${colorClasses.text} bg-transparent`}
+                        asChild
+                      >
+                        <Link href={category.href}>
+                          View Products
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </FadeInSection>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -207,56 +264,59 @@ export default function ProductsPage() {
           </FadeInSection>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {featuredProducts.map((product, index) => (
-              <FadeInSection key={index} delay={index * 200}>
-                <Card className="border-green-200 hover:border-green-400 hover:shadow-lg hover:shadow-green-200/50 transition-all duration-300 transform hover:scale-105 bg-white">
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <div className="space-y-2">
-                        <Badge variant="outline" className="text-green-600 border-green-600">
-                          {product.category}
-                        </Badge>
-                        <CardTitle className="text-xl text-green-700">{product.name}</CardTitle>
+            {featuredProducts.map((product, index) => {
+              const colorClasses = getColorClasses(product.color)
+              return (
+                <FadeInSection key={index} delay={index * 200}>
+                  <Card className={`${colorClasses.border} hover:${colorClasses.border.replace('200', '400')} hover:shadow-lg ${colorClasses.shadow}/50 transition-all duration-300 transform hover:scale-105 bg-white`}>
+                    <CardHeader>
+                      <div className="flex items-start justify-between">
+                        <div className="space-y-2">
+                          <Badge variant="outline" className={`${colorClasses.text} ${colorClasses.border.replace('200', '600')}`}>
+                            {product.category}
+                          </Badge>
+                          <CardTitle className={`text-xl ${colorClasses.text}`}>{product.name}</CardTitle>
+                        </div>
+                        {product.datasheet && (
+                          <Button size="sm" variant="ghost" className={`text-gray-500 hover:${colorClasses.text}`}>
+                            <Download className="h-4 w-4" />
+                          </Button>
+                        )}
                       </div>
-                      {product.datasheet && (
-                        <Button size="sm" variant="ghost" className="text-gray-500 hover:text-green-600">
-                          <Download className="h-4 w-4" />
-                        </Button>
-                      )}
-                    </div>
-                    <CardDescription className="text-base leading-relaxed text-gray-600">
-                      {product.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div>
-                        <h4 className="font-medium text-green-700 mb-2">Key Applications:</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {product.applications.map((app) => (
-                            <Badge key={app} variant="secondary" className="text-xs bg-green-100 text-green-700">
-                              {app}
-                            </Badge>
-                          ))}
+                      <CardDescription className="text-base leading-relaxed text-gray-600">
+                        {product.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div>
+                          <h4 className={`font-medium ${colorClasses.text} mb-2`}>Key Applications:</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {product.applications.map((app) => (
+                              <Badge key={app} variant="secondary" className={`text-xs ${colorClasses.badge}`}>
+                                {app}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                        <div className="flex gap-2">
+                          <Button size="sm" className={`flex-1 ${colorClasses.button} text-white`}>
+                            Request Sample
+                          </Button>
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className={`flex-1 ${colorClasses.border.replace('200', '600')} ${colorClasses.text} hover:${colorClasses.bg} bg-transparent`}
+                          >
+                            Technical Data
+                          </Button>
                         </div>
                       </div>
-                      <div className="flex gap-2">
-                        <Button size="sm" className="flex-1 bg-green-600 hover:bg-green-700 text-white">
-                          Request Sample
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="flex-1 border-green-600 text-green-600 hover:bg-green-50 bg-transparent"
-                        >
-                          Technical Data
-                        </Button>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </FadeInSection>
-            ))}
+                    </CardContent>
+                  </Card>
+                </FadeInSection>
+              )
+            })}
           </div>
 
           <FadeInSection delay={800} className="text-center mt-12">
